@@ -1,3 +1,4 @@
+# EX-01
 # Write a simple Ideal sampling program using Python.
 
 
@@ -14,29 +15,53 @@ Matplotlib: A plotting library for generating high-quality graphs and visualizat
 ## Program
 ```
 import numpy as np
+
 import matplotlib.pyplot as plt
+
 fs = 100  # Sampling frequency (samples per second)
+
 f = 5  # Frequency of the sine wave (in Hz)
+
 T = 1 / f  # Period of the sine wave
+
 t_continuous = np.linspace(0, 1, 1000)  # High-resolution time array for continuous signal
+
 t_sampled = np.arange(0, 1, 1/fs)  # Time points for ideal sampling
+
 continuous_signal = np.sin(2 * np.pi * f * t_continuous)
+
 sampled_signal = np.sin(2 * np.pi * f * t_sampled)
+
 fig, axs = plt.subplots(2, 1, figsize=(12, 8))
+
 axs[0].plot(t_continuous, continuous_signal, label="Continuous Signal (Sine Wave)", color='b', linewidth=2)
+
 axs[0].set_title("Continuous Sine Wave")
+
 axs[0].set_xlabel("Time [s]")
+
 axs[0].set_ylabel("Amplitude")
+
 axs[0].grid(True)
+
 axs[0].legend(loc="best")
+
 axs[1].plot(t_continuous, continuous_signal, label="Continuous Signal", color='b', alpha=0.7)
+
 axs[1].stem(t_sampled, sampled_signal, 'r', markerfmt='ro', basefmt=" ", linefmt='r-', label="Ideal Samples")
+
 axs[1].set_title("Ideal Sampling of the Sine Wave")
+
 axs[1].set_xlabel("Time [s]")
+
 axs[1].set_ylabel("Amplitude")
+
 axs[1].grid(True)
+
 axs[1].legend(loc="best")
+
 plt.tight_layout()
+
 plt.show()
 ```
 ## Output waveform   
