@@ -1,4 +1,4 @@
-# EX-01
+# EX-01 Name: DINESH KUMAR A (212223060057)
 # Write a simple Ideal sampling program using Python.
 
 
@@ -14,58 +14,84 @@ Matplotlib: A plotting library for generating high-quality graphs and visualizat
       
 ## Program
 ```
+#Impulse Sampling
+
 import numpy as np
 
 import matplotlib.pyplot as plt
 
-fs = 100  # Sampling frequency (samples per second)
+from scipy.signal import resample
 
-f = 5  # Frequency of the sine wave (in Hz)
+fs = 100
 
-T = 1 / f  # Period of the sine wave
+t = np.arange(0, 1, 1/fs) 
 
-t_continuous = np.linspace(0, 1, 1000)  # High-resolution time array for continuous signal
+f = 5
 
-t_sampled = np.arange(0, 1, 1/fs)  # Time points for ideal sampling
+signal = np.sin(2 * np.pi * f * t)
 
-continuous_signal = np.sin(2 * np.pi * f * t_continuous)
+plt.figure(figsize=(10, 4))
 
-sampled_signal = np.sin(2 * np.pi * f * t_sampled)
+plt.plot(t, signal, label='Continuous Signal')
 
-fig, axs = plt.subplots(2, 1, figsize=(12, 8))
+plt.title('Continuous Signal (fs = 100 Hz)')
 
-axs[0].plot(t_continuous, continuous_signal, label="Continuous Signal (Sine Wave)", color='b', linewidth=2)
+plt.xlabel('Time [s]')
 
-axs[0].set_title("Continuous Sine Wave")
+plt.ylabel('Amplitude')
 
-axs[0].set_xlabel("Time [s]")
+plt.grid(True)
 
-axs[0].set_ylabel("Amplitude")
-
-axs[0].grid(True)
-
-axs[0].legend(loc="best")
-
-axs[1].plot(t_continuous, continuous_signal, label="Continuous Signal", color='b', alpha=0.7)
-
-axs[1].stem(t_sampled, sampled_signal, 'r', markerfmt='ro', basefmt=" ", linefmt='r-', label="Ideal Samples")
-
-axs[1].set_title("Ideal Sampling of the Sine Wave")
-
-axs[1].set_xlabel("Time [s]")
-
-axs[1].set_ylabel("Amplitude")
-
-axs[1].grid(True)
-
-axs[1].legend(loc="best")
-
-plt.tight_layout()
+plt.legend()
 
 plt.show()
+
+t_sampled = np.arange(0, 1, 1/fs)
+
+signal_sampled = np.sin(2 * np.pi * f * t_sampled)
+
+plt.figure(figsize=(10, 4))
+
+plt.plot(t, signal, label='Continuous Signal', alpha=0.7)
+
+plt.stem(t_sampled, signal_sampled, linefmt='r-', markerfmt='ro', basefmt='r-', label='Sampled Signal (fs = 100 Hz)')
+
+plt.title('Sampling of Continuous Signal (fs = 100 Hz)')
+
+plt.xlabel('Time [s]')
+
+plt.ylabel('Amplitude')
+
+plt.grid(True)
+
+plt.legend()
+
+plt.show()
+
+reconstructed_signal = resample(signal_sampled, len(t))
+
+plt.figure(figsize=(10, 4))
+
+plt.plot(t, signal, label='Continuous Signal', alpha=0.7)
+
+plt.plot(t, reconstructed_signal, 'r--', label='Reconstructed Signal (fs = 100 Hz)')
+
+plt.title('Reconstruction of Sampled Signal (fs = 100 Hz)')
+
+plt.xlabel('Time [s]')
+
+plt.ylabel('Amplitude')
+
+plt.grid(True)
+
+plt.legend()
+
+plt.show()
+
 ```
 ## Output waveform   
- ![Screenshot 2025-03-17 202545](https://github.com/user-attachments/assets/3cfd2698-3488-4664-bc48-20f30d27ffef)
+![Screenshot 2025-03-18 104803](https://github.com/user-attachments/assets/60400baf-b49a-4050-8dd8-dfcd666f2849)
+
 
 ## Result 
    The results show two plots: the first displays a continuous sine wave with a 5 Hz frequency. The second plot illustrates the ideal
