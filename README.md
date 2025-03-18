@@ -87,10 +87,11 @@ plt.grid(True)
 plt.legend()
 
 plt.show()
-
 ```
+
 ## Output waveform   
-![Screenshot 2025-03-18 104803](https://github.com/user-attachments/assets/60400baf-b49a-4050-8dd8-dfcd666f2849)
+![Screenshot 2025-03-18 112232](https://github.com/user-attachments/assets/0139a5e2-4e8f-412f-aec5-0f9dd925e379)
+
 
 
 ## Result 
